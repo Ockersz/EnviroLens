@@ -6,6 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DAE36F402DA7CA7C00D59FA6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DAE36F3F2DA7CA7C00D59FA6 /* FirebaseAnalytics */; };
+		DAE36F422DA7CA7C00D59FA6 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = DAE36F412DA7CA7C00D59FA6 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		DAE36F442DA7CA7C00D59FA6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DAE36F432DA7CA7C00D59FA6 /* FirebaseAuth */; };
+		DAE36F4B2DA8CCDC00D59FA6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DAE36F4A2DA8CCDC00D59FA6 /* FirebaseFirestore */; };
+		DAE36F4D2DA8CD4F00D59FA6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DAE36F4C2DA8CD4F00D59FA6 /* FirebaseFirestore */; };
+		DAE36F4F2DA8CD4F00D59FA6 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = DAE36F4E2DA8CD4F00D59FA6 /* FirebaseFirestoreCombine-Community */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		DA083B112D9523130038CD13 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -29,9 +38,22 @@
 		DA083B1A2D9523130038CD13 /* EnviroLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnviroLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		DAE36F552DA8F4A200D59FA6 /* Exceptions for "EnviroLens" folder in "EnviroLens" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = DA083AF92D9523120038CD13 /* EnviroLens */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		DA083AFC2D9523120038CD13 /* EnviroLens */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				DAE36F552DA8F4A200D59FA6 /* Exceptions for "EnviroLens" folder in "EnviroLens" target */,
+			);
 			path = EnviroLens;
 			sourceTree = "<group>";
 		};
@@ -52,6 +74,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAE36F402DA7CA7C00D59FA6 /* FirebaseAnalytics in Frameworks */,
+				DAE36F4B2DA8CCDC00D59FA6 /* FirebaseFirestore in Frameworks */,
+				DAE36F442DA7CA7C00D59FA6 /* FirebaseAuth in Frameworks */,
+				DAE36F4F2DA8CD4F00D59FA6 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				DAE36F4D2DA8CD4F00D59FA6 /* FirebaseFirestore in Frameworks */,
+				DAE36F422DA7CA7C00D59FA6 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +140,12 @@
 			);
 			name = EnviroLens;
 			packageProductDependencies = (
+				DAE36F3F2DA7CA7C00D59FA6 /* FirebaseAnalytics */,
+				DAE36F412DA7CA7C00D59FA6 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				DAE36F432DA7CA7C00D59FA6 /* FirebaseAuth */,
+				DAE36F4A2DA8CCDC00D59FA6 /* FirebaseFirestore */,
+				DAE36F4C2DA8CD4F00D59FA6 /* FirebaseFirestore */,
+				DAE36F4E2DA8CD4F00D59FA6 /* FirebaseFirestoreCombine-Community */,
 			);
 			productName = EnviroLens;
 			productReference = DA083AFA2D9523120038CD13 /* EnviroLens.app */;
@@ -195,6 +229,9 @@
 			);
 			mainGroup = DA083AF12D9523120038CD13;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DAE36F3E2DA7CA7C00D59FA6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DA083AFB2D9523120038CD13 /* Products */;
 			projectDirPath = "";
@@ -392,8 +429,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"EnviroLens/Preview Content\"";
+				DEVELOPMENT_TEAM = VH2C3MZ659;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EnviroLens/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to scan waste items.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app use face id to safely authenticate a user";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -429,8 +470,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"EnviroLens/Preview Content\"";
+				DEVELOPMENT_TEAM = VH2C3MZ659;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EnviroLens/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to scan waste items.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app use face id to safely authenticate a user";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -583,6 +628,47 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DAE36F3E2DA7CA7C00D59FA6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DAE36F3F2DA7CA7C00D59FA6 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAE36F3E2DA7CA7C00D59FA6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		DAE36F412DA7CA7C00D59FA6 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAE36F3E2DA7CA7C00D59FA6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		DAE36F432DA7CA7C00D59FA6 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAE36F3E2DA7CA7C00D59FA6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		DAE36F4A2DA8CCDC00D59FA6 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseFirestore;
+		};
+		DAE36F4C2DA8CD4F00D59FA6 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseFirestore;
+		};
+		DAE36F4E2DA8CD4F00D59FA6 /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DA083AF22D9523120038CD13 /* Project object */;
 }

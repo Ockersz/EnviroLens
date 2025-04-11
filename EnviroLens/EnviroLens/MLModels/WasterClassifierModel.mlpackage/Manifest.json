@@ -1,0 +1,24 @@
+{
+    "fileFormatVersion": "1.0.0",
+    "itemInfoEntries": {
+        "37280E56-89FF-4081-A5A5-02B73A820402": {
+            "author": "com.apple.CoreML",
+            "description": "External Metadata Overlay",
+            "name": "Metadata.json",
+            "path": "com.apple.CoreML/Metadata.json"
+        },
+        "62FCC810-A4EB-4991-B071-65574310663E": {
+            "author": "com.apple.CoreML",
+            "description": "External FeatureDescription Overlay",
+            "name": "FeatureDescriptions.json",
+            "path": "com.apple.CoreML/FeatureDescriptions.json"
+        },
+        "8C00B27A-36B6-49B4-87A2-220C92A4AC71": {
+            "author": "com.apple.CoreML",
+            "description": "CoreML Model Specification",
+            "name": "WasterClassifierModel.mlmodel",
+            "path": "com.apple.CoreML/WasterClassifierModel.mlmodel"
+        }
+    },
+    "rootModelIdentifier": "8C00B27A-36B6-49B4-87A2-220C92A4AC71"
+}
