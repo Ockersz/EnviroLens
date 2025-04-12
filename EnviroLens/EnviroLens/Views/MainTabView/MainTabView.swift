@@ -52,21 +52,12 @@ struct MainTabView: View {
             ScanWasteView()
                 .tabItem {
                     VStack {
-                        Image(systemName: "arrow.triangle.2.circlepath.circle.fill") // Replace with actual recycle icon later
+                        Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
                         Text("Redeem")
                     }
                 }
                 .tag(4)
         }
-        .accentColor(Color("PrBtnCol")) // Your custom green color from Assets
+        .accentColor(Color("PrBtnCol"))
     }
-}
-
-// MARK: - Placeholder Views
-
-struct HomeView: View { var body: some View { Text("🏠 Home") } }
-
-
-#Preview {
-    MainTabView()
 }

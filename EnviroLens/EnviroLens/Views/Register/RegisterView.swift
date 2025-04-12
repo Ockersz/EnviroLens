@@ -3,13 +3,13 @@ import FirebaseAuth
 import FirebaseFirestore
 
 struct RegisterView: View {
-    @State private var name = "Shahein Ockersz"
-    @State private var username = "shahein"
-    @State private var email = "shaheinockersz1234@gmail.com"
-    @State private var password = "Ockersz@$5"
-    @State private var confirmPassword = "Ockersz@$5"
-    @State private var selectedArea = "Colombo" //"Select Area"
-    @State private var acceptTerms = true //false
+    @State private var name = ""
+    @State private var username = ""
+    @State private var email = ""
+    @State private var password = ""
+    @State private var confirmPassword = ""
+    @State private var selectedArea = "Select Area"
+    @State private var acceptTerms = false
     @State private var isShowingAreaDialog = false
     @State private var isLoading = false
     @State private var errorMessage = ""

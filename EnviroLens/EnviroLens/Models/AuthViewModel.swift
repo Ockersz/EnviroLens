@@ -6,6 +6,8 @@ import Combine
 class AuthViewModel: ObservableObject {
     @Published var user: User?
     @Published var lastSignedInEmail: String?
+    @Published var currentUserName: String? = nil
+
 
     private var authListener: AuthStateDidChangeListenerHandle?
     
@@ -15,6 +17,7 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    // MARK: Sign in with username
     func signInWithUsername(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         let db = Firestore.firestore()
         
@@ -32,12 +35,12 @@ class AuthViewModel: ObservableObject {
                     return
                 }
                 
-                self?.lastSignedInEmail = email // ✅ Save the email
+                self?.lastSignedInEmail = email
                 self?.signIn(email: email, password: password, completion: completion)
             }
     }
 
-    
+    // MARK: Sign in with email and pw
     func signIn(email: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
             if let error = error {
@@ -45,10 +48,26 @@ class AuthViewModel: ObservableObject {
                 completion(false, error)
             } else {
                 self?.user = result?.user
+                self?.fetchCurrentUserData(uid: result?.user.uid)
                 completion(true, nil)
             }
         }
     }
+
+    // MARK: Get user name from firestore
+    func fetchCurrentUserData(uid: String?) {
+        guard let uid = uid else { return }
+        
+        let db = Firestore.firestore()
+        db.collection("users").document(uid).getDocument { [weak self] snapshot, error in
+            if let data = snapshot?.data(), let name = data["name"] as? String {
+                DispatchQueue.main.async {
+                    self?.currentUserName = name
+                }
+            }
+        }
+    }
+
 
     
     // MARK: - Sign Up (Register)
@@ -109,6 +128,12 @@ class AuthViewModel: ObservableObject {
                 }
             }
     }
+    
+    
+    func getUserName() -> String {
+        return currentUserName ?? "User"
+    }
+
     
     // MARK: - Sign Out
     func signOut() {

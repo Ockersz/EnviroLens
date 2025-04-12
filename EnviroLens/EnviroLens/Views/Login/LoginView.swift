@@ -100,18 +100,19 @@ struct LoginView: View {
                     }
                     .padding(.horizontal)
                     .padding(.top, 4)
-                }
-                
-                HStack {
-                    Text("New member?")
-                        .foregroundColor(.secondary)
-                    Button("Sign Up") {
-                        navigateToRegister = true
+                    
+                    
+                    HStack {
+                        Text("New member?")
+                            .foregroundColor(.secondary)
+                        Button("Sign Up") {
+                            navigateToRegister = true
+                        }
+                        .foregroundColor(.blue)
                     }
-                    .foregroundColor(.blue)
+                    .font(.footnote)
+                    .padding(.top, 10)
                 }
-                .font(.footnote)
-                .padding(.top, 10)
             }
             .padding(.top)
             .background(Color(.systemBackground))
