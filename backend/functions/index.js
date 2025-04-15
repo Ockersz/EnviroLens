@@ -5,7 +5,7 @@ const logger = require("firebase-functions/logger");
 exports.getUserStats = onRequest((req, res) => {
 
     const dummyData = {
-        credits: 480,
+        credits: 4800,
         areaRank: 12
     };
 
@@ -16,7 +16,7 @@ exports.getTopLeaderboard = onRequest((req, res) => {
 
     const ifall = req.query?.type;
 
-    if(ifall && ifall === "all") {
+    if (ifall && ifall === "all") {
         return res.status(200).json({
             leaders: [
                 { name: "Alice", score: 1000, rank: 1 },
@@ -42,7 +42,6 @@ exports.getTopLeaderboard = onRequest((req, res) => {
     };
     res.status(200).json(dummyData);
 });
-
 
 exports.getBinDisposalGuidlines = onRequest((req, res) => {
     //check for the bin type
@@ -219,7 +218,6 @@ exports.getBinDisposalGuidlines = onRequest((req, res) => {
     res.status(200).json(guidelines[binType]);
 });
 
-
 exports.getDisposalCenters = onRequest(async (req, res) => {
     const dummyData = [
         {
@@ -384,7 +382,6 @@ exports.getDisposalCenters = onRequest(async (req, res) => {
     res.status(200).json(dummyData);
 });
 
-
 exports.getDisposalHistory = onRequest((req, res) => {
     const dummyData = [
         {
@@ -542,3 +539,35 @@ exports.getNotifications = onRequest((req, res) => {
     res.status(200).json(dummyNotifications);
 });
 
+exports.getRedeemItems = onRequest((req, res) => {
+    const items = [
+        {
+            category: "Plastic",
+            products: [
+                { id: "p1", name: "Chair", image: "chair", credits: 500 },
+                { id: "p2", name: "Basin", image: "basin", credits: 500 },
+                { id: "p3", name: "Table", image: "table", credits: 500 },
+                { id: "p4", name: "Bucket", image: "bucket", credits: 450 },
+            ],
+        },
+        {
+            category: "Organic",
+            products: [
+                { id: "o1", name: "Bag", image: "bag", credits: 500 },
+                { id: "o2", name: "Mesh", image: "mesh", credits: 500 },
+                { id: "o3", name: "Food Cover", image: "foodcover", credits: 500 },
+                { id: "o4", name: "Basket", image: "basket", credits: 520 },
+            ],
+        },
+        {
+            category: "Electronics",
+            products: [
+                { id: "e1", name: "Mouse", image: "mouse", credits: 600 },
+                { id: "e2", name: "Keyboard", image: "keyboard", credits: 800 },
+                { id: "e3", name: "Power Bank", image: "powerbank", credits: 1000 },
+            ],
+        },
+    ];
+
+    res.status(200).json(items);
+});

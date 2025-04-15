@@ -47,7 +47,7 @@ struct MainTabView: View {
                 }
                 .tag(3)
             
-            ScanWasteView()
+            RedeemView()
                 .tabItem {
                     VStack {
                         Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
