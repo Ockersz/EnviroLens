@@ -11,7 +11,7 @@ struct DisposalCenter: Identifiable, Codable {
     let name: String
     let latitude: Double
     let longitude: Double
-    let acceptedTypes: [String] // ✅ now supports multiple types
+    let acceptedTypes: [String]
     let hours: Hours
     
     var coordinate: CLLocationCoordinate2D {
