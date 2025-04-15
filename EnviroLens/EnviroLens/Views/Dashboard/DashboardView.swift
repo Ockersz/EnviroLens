@@ -30,8 +30,13 @@ struct DashboardView: View {
                         Spacer()
                         
                         HStack(spacing: 16) {
-                            Image(systemName: "bell")
-                                .font(.title2)
+                            Button {
+                                selectedFeature = .notifications
+                            }
+                            label: {
+                                Image(systemName: "bell")
+                                    .font(.title2)
+                            }
                             Button {
                                 showingLogoutConfirmation = true
                             } label: {
@@ -135,6 +140,7 @@ struct DashboardView: View {
                     case .nearby: NearbyLocationsView()
                     case .dispose: DisposeView()
                     case .bins: MyBinsView()
+                    case .notifications: NotificationsView()
 //                    case .leaderboard: FullLeaderboardView()
 //                    case .mission: MissionView()
                     default : Text("Error")
@@ -253,5 +259,5 @@ struct DashboardView: View {
 enum FeatureScreen: String, Identifiable {
     var id: String { self.rawValue }
     
-    case scan, nearby, dispose, bins, leaderboard, mission
+    case scan, nearby, dispose, bins, leaderboard, mission, notifications
 }
