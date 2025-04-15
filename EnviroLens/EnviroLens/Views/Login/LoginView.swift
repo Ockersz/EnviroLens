@@ -41,6 +41,7 @@ struct LoginView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     customTextField("Username", text: $username)
+                        .accessibilityIdentifier("usernameField")
                     if attemptedLogin && !FormValidator.isValidUsername(username) {
                         Text("Please enter a valid username.")
                             .font(.caption)
@@ -51,6 +52,7 @@ struct LoginView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     secureCustomField("Password", text: $password)
+                        .accessibilityIdentifier("passwordField")
                     if attemptedLogin && password.isEmpty {
                         Text("Password cannot be empty.")
                             .font(.caption)
@@ -85,6 +87,7 @@ struct LoginView: View {
                 .padding(.horizontal)
                 .padding(.top, 10)
                 .disabled(isLoading)
+                .accessibilityIdentifier("loginButton")
                 
                 if !isLoading {
                     Button(action: handleBiometricLogin) {
@@ -100,6 +103,7 @@ struct LoginView: View {
                     }
                     .padding(.horizontal)
                     .padding(.top, 4)
+                    .accessibilityIdentifier("biometricLoginButton")
                     
                     
                     HStack {
@@ -118,9 +122,11 @@ struct LoginView: View {
             .background(Color(.systemBackground))
             .navigationDestination(isPresented: $navigateToRegister) {
                 RegisterView()
+                    .accessibilityIdentifier("RegisterView")
             }
             .navigationDestination(isPresented: $navigateToHome) {
                 MainTabView()
+                    .accessibilityIdentifier("MainTabView")
             }
             .onReceive(biometricAuth.$isAuthenticated) { isAuthenticated in
                 if isAuthenticated {
@@ -147,6 +153,7 @@ struct LoginView: View {
     
     func customTextField(_ placeholder: String, text: Binding<String>, keyboardType: UIKeyboardType = .default) -> some View {
         TextField(placeholder, text: text)
+            .accessibilityIdentifier("usernameField")
             .keyboardType(keyboardType)
             .autocapitalization(.none)
             .disableAutocorrection(true)
@@ -159,6 +166,7 @@ struct LoginView: View {
     
     func secureCustomField(_ placeholder: String, text: Binding<String>) -> some View {
         SecureField(placeholder, text: text)
+            .accessibilityIdentifier("passwordField")
             .padding()
             .frame(height: 50)
             .background(Color(.secondarySystemBackground))

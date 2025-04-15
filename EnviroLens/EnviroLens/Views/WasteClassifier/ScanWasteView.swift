@@ -48,9 +48,11 @@ struct ScanWasteView: View {
                         .resizable()
                         .scaledToFill()
                         .ignoresSafeArea(edges: .all)
+                        .accessibilityIdentifier("CapturedImage")
                 } else {
                     CameraPreview(viewModel: cameraVM)
                         .edgesIgnoringSafeArea(.top)
+                        .accessibilityIdentifier("CameraPreview")
                 }
                 
                 VStack {
@@ -63,11 +65,13 @@ struct ScanWasteView: View {
                                 .padding(8)
                                 .background(.ultraThinMaterial)
                                 .cornerRadius(8)
+                                .accessibilityIdentifier("DetectedWasteLabel")
                             Text("Confidence: \(String(format: "%.2f", cameraVM.confidence * 100))%")
                                 .font(.subheadline)
                                 .padding(8)
                                 .background(.ultraThinMaterial)
                                 .cornerRadius(8)
+                                .accessibilityIdentifier("ConfidenceLabel")
                         }
                         .padding()
                     }
@@ -85,6 +89,7 @@ struct ScanWasteView: View {
                                 .background(Color("PrBtnCol"))
                                 .cornerRadius(8)
                         }
+                        .accessibilityIdentifier("CaptureButton")
                         
                         Button(action: {
                             cameraVM.reset()
@@ -95,6 +100,7 @@ struct ScanWasteView: View {
                                 .background(Color.gray)
                                 .cornerRadius(8)
                         }
+                        .accessibilityIdentifier("ResetButton")
                     }
                     .frame(width: 300)
                     .padding(.bottom, 20)
@@ -145,6 +151,7 @@ struct ScanWasteView: View {
                             .padding()
                             .background(.ultraThinMaterial)
                             .cornerRadius(12)
+                            .accessibilityIdentifier("ProcessingIndicator")
                     }
                 }
                 
@@ -154,6 +161,7 @@ struct ScanWasteView: View {
                         .ignoresSafeArea()
                         .transition(.opacity)
                         .animation(.easeOut(duration: 0.2), value: cameraVM.showShutterFlash)
+                        .accessibilityIdentifier("ShutterFlash")
                 }
             }
             .toolbar {
@@ -178,11 +186,13 @@ struct ScanWasteView: View {
                         .padding(.top)
                         .padding(.horizontal)
                         .padding(.bottom, 8)
+                        .accessibilityIdentifier("GuidelineTitle")
                     
                     if isLoadingGuidelines {
                         ProgressView("Loading...")
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .padding()
+                            .accessibilityIdentifier("GuidelineLoadingIndicator")
                     } else {
                         ScrollView {
                             VStack(alignment: .leading, spacing: 16) {
@@ -194,6 +204,7 @@ struct ScanWasteView: View {
                                             .foregroundColor(.primary)
                                             .lineLimit(nil)
                                             .fixedSize(horizontal: false, vertical: true)
+                                            .accessibilityIdentifier("GuidelineTitle_\(guide.id)")
                                         
                                         Text(guide.description)
                                             .font(.body)
@@ -201,6 +212,7 @@ struct ScanWasteView: View {
                                             .multilineTextAlignment(.leading)
                                             .lineLimit(nil)
                                             .fixedSize(horizontal: false, vertical: true)
+                                            .accessibilityIdentifier("GuidelineDescription_\(guide.id)")
                                     }
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.vertical, 16)
@@ -219,6 +231,7 @@ struct ScanWasteView: View {
                             .padding(.horizontal)
                         }
                         .scrollIndicators(.visible)
+                        .accessibilityIdentifier("GuidelineScrollView")
                     }
                 }
                 .padding(.bottom, 16)
@@ -241,6 +254,7 @@ struct ScanWasteView: View {
                     .foregroundColor(.white)
             }
         }
+        .accessibilityIdentifier("\(typeKey)BinButton")
     }
     
     func fetchGuidelines(for binType: String) {

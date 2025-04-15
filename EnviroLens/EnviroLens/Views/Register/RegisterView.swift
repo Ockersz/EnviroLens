@@ -13,6 +13,7 @@ struct RegisterView: View {
     @State private var isShowingAreaDialog = false
     @State private var isLoading = false
     @State private var errorMessage = ""
+    @State private var attemptedRegister = false
     
     @Environment(\.dismiss) var dismiss
     
@@ -20,6 +21,9 @@ struct RegisterView: View {
     
     var body: some View {
         ScrollView {
+            Color.clear
+                .accessibilityIdentifier("RegisterView")
+
             VStack(spacing: 16) {
                 Image("RecycleBadge")
                     .resizable()
@@ -35,7 +39,7 @@ struct RegisterView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     customTextField("Name", text: $name)
-                    if !FormValidator.isValidName(name) {
+                    if attemptedRegister && !FormValidator.isValidName(name) {
                         Text("Name cannot be empty.")
                             .font(.caption)
                             .foregroundColor(.red)
@@ -45,12 +49,12 @@ struct RegisterView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     customTextField("Username", text: $username)
-                    if !FormValidator.isValidUsername(username) {
+                    if attemptedRegister && !FormValidator.isValidUsername(username) {
                         Text("Username must be 3–15 characters, alphanumeric or underscore.")
                             .font(.caption)
                             .foregroundColor(.red)
                             .padding(.horizontal)
-                    } else if !FormValidator.isUsernameAllowed(username) {
+                    } else if attemptedRegister && !FormValidator.isUsernameAllowed(username) {
                         Text("This username is reserved. Please choose another.")
                             .font(.caption)
                             .foregroundColor(.red)
@@ -60,7 +64,7 @@ struct RegisterView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     customTextField("Email", text: $email, keyboardType: .emailAddress)
-                    if !FormValidator.isValidEmail(email) {
+                    if attemptedRegister && !FormValidator.isValidEmail(email) {
                         Text("Please enter a valid email address.")
                             .font(.caption)
                             .foregroundColor(.red)
@@ -70,7 +74,8 @@ struct RegisterView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     secureCustomField("Password", text: $password)
-                    if !FormValidator.isStrongPassword(password) {
+                        .accessibilityIdentifier("PwdField")
+                    if attemptedRegister && !FormValidator.isStrongPassword(password) {
                         Text("Password must be 8+ chars, include upper/lowercase, number & special char.")
                             .font(.caption)
                             .foregroundColor(.red)
@@ -80,7 +85,8 @@ struct RegisterView: View {
                 
                 VStack(alignment: .leading, spacing: 4) {
                     secureCustomField("Confirm Password", text: $confirmPassword)
-                    if !FormValidator.passwordsMatch(password, confirmPassword) {
+                        .accessibilityIdentifier("ConfField")
+                    if attemptedRegister && !FormValidator.passwordsMatch(password, confirmPassword) {
                         Text("Passwords do not match.")
                             .font(.caption)
                             .foregroundColor(.red)
@@ -112,7 +118,7 @@ struct RegisterView: View {
                     }
                 }
                 
-                if selectedArea == "Select Area" {
+                if attemptedRegister && selectedArea == "Select Area" {
                     Text("Please select an area.")
                         .font(.caption)
                         .foregroundColor(.red)
@@ -136,14 +142,14 @@ struct RegisterView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
                 
-                if !acceptTerms {
+                if attemptedRegister && !acceptTerms {
                     Text("You must accept the terms and privacy policy.")
                         .font(.caption)
                         .foregroundColor(.red)
                         .padding(.horizontal)
                 }
                 
-                if !errorMessage.isEmpty {
+                if attemptedRegister && !errorMessage.isEmpty {
                     Text(errorMessage)
                         .foregroundColor(.red)
                         .font(.caption)
@@ -165,7 +171,8 @@ struct RegisterView: View {
                 }
                 .padding(.horizontal)
                 .padding(.top, 10)
-                .disabled(!formIsValid())
+                .disabled(isLoading)
+                .accessibilityIdentifier("RegisterButton")
                 
                 HStack {
                     Text("Already a member?")
@@ -204,6 +211,7 @@ struct RegisterView: View {
             .background(Color(.secondarySystemBackground))
             .cornerRadius(8)
             .padding(.horizontal)
+            .accessibilityIdentifier(placeholder)
     }
     
     func formIsValid() -> Bool {
@@ -218,7 +226,11 @@ struct RegisterView: View {
     }
     
     func registerUser() {
-        print("registering user")
+        attemptedRegister = true
+        
+        guard formIsValid() else {
+            return
+        }
         isLoading = true
         errorMessage = ""
         

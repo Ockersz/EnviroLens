@@ -30,12 +30,20 @@
 			remoteGlobalIDString = DA083AF92D9523120038CD13;
 			remoteInfo = EnviroLens;
 		};
+		DAE36FE32DAE8C6F00D59FA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA083AF22D9523120038CD13 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA083AF92D9523120038CD13;
+			remoteInfo = EnviroLens;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		DA083AFA2D9523120038CD13 /* EnviroLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnviroLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA083B102D9523130038CD13 /* EnviroLensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnviroLensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA083B1A2D9523130038CD13 /* EnviroLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnviroLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAE36FDD2DAE8C6F00D59FA6 /* EnviroLensUITestsNew.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnviroLensUITestsNew.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -45,6 +53,20 @@
 				Info.plist,
 			);
 			target = DA083AF92D9523120038CD13 /* EnviroLens */;
+		};
+		DAE36FD72DAE8B6300D59FA6 /* Exceptions for "EnviroLensUITests" folder in "EnviroLensTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				LoginViewUITests.swift,
+			);
+			target = DA083B0F2D9523130038CD13 /* EnviroLensTests */;
+		};
+		DAE36FD82DAE8B6300D59FA6 /* Exceptions for "EnviroLensUITests" folder in "EnviroLensUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				LoginViewUITests.swift,
+			);
+			target = DA083B192D9523130038CD13 /* EnviroLensUITests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -64,7 +86,16 @@
 		};
 		DA083B1D2D9523130038CD13 /* EnviroLensUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				DAE36FD72DAE8B6300D59FA6 /* Exceptions for "EnviroLensUITests" folder in "EnviroLensTests" target */,
+				DAE36FD82DAE8B6300D59FA6 /* Exceptions for "EnviroLensUITests" folder in "EnviroLensUITests" target */,
+			);
 			path = EnviroLensUITests;
+			sourceTree = "<group>";
+		};
+		DAE36FDE2DAE8C6F00D59FA6 /* EnviroLensUITestsNew */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = EnviroLensUITestsNew;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -97,6 +128,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DAE36FDA2DAE8C6F00D59FA6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -106,6 +144,7 @@
 				DA083AFC2D9523120038CD13 /* EnviroLens */,
 				DA083B132D9523130038CD13 /* EnviroLensTests */,
 				DA083B1D2D9523130038CD13 /* EnviroLensUITests */,
+				DAE36FDE2DAE8C6F00D59FA6 /* EnviroLensUITestsNew */,
 				DA083AFB2D9523120038CD13 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,6 +155,7 @@
 				DA083AFA2D9523120038CD13 /* EnviroLens.app */,
 				DA083B102D9523130038CD13 /* EnviroLensTests.xctest */,
 				DA083B1A2D9523130038CD13 /* EnviroLensUITests.xctest */,
+				DAE36FDD2DAE8C6F00D59FA6 /* EnviroLensUITestsNew.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -197,6 +237,29 @@
 			productReference = DA083B1A2D9523130038CD13 /* EnviroLensUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		DAE36FDC2DAE8C6F00D59FA6 /* EnviroLensUITestsNew */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAE36FE52DAE8C6F00D59FA6 /* Build configuration list for PBXNativeTarget "EnviroLensUITestsNew" */;
+			buildPhases = (
+				DAE36FD92DAE8C6F00D59FA6 /* Sources */,
+				DAE36FDA2DAE8C6F00D59FA6 /* Frameworks */,
+				DAE36FDB2DAE8C6F00D59FA6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DAE36FE42DAE8C6F00D59FA6 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				DAE36FDE2DAE8C6F00D59FA6 /* EnviroLensUITestsNew */,
+			);
+			name = EnviroLensUITestsNew;
+			packageProductDependencies = (
+			);
+			productName = EnviroLensUITestsNew;
+			productReference = DAE36FDD2DAE8C6F00D59FA6 /* EnviroLensUITestsNew.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -215,6 +278,10 @@
 						TestTargetID = DA083AF92D9523120038CD13;
 					};
 					DA083B192D9523130038CD13 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = DA083AF92D9523120038CD13;
+					};
+					DAE36FDC2DAE8C6F00D59FA6 = {
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = DA083AF92D9523120038CD13;
 					};
@@ -240,6 +307,7 @@
 				DA083AF92D9523120038CD13 /* EnviroLens */,
 				DA083B0F2D9523130038CD13 /* EnviroLensTests */,
 				DA083B192D9523130038CD13 /* EnviroLensUITests */,
+				DAE36FDC2DAE8C6F00D59FA6 /* EnviroLensUITestsNew */,
 			);
 		};
 /* End PBXProject section */
@@ -260,6 +328,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DA083B182D9523130038CD13 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAE36FDB2DAE8C6F00D59FA6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -290,6 +365,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DAE36FD92DAE8C6F00D59FA6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -302,6 +384,11 @@
 			isa = PBXTargetDependency;
 			target = DA083AF92D9523120038CD13 /* EnviroLens */;
 			targetProxy = DA083B1B2D9523130038CD13 /* PBXContainerItemProxy */;
+		};
+		DAE36FE42DAE8C6F00D59FA6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA083AF92D9523120038CD13 /* EnviroLens */;
+			targetProxy = DAE36FE32DAE8C6F00D59FA6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -511,6 +598,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VH2C3MZ659;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
@@ -533,6 +621,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VH2C3MZ659;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
@@ -554,6 +643,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VH2C3MZ659;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
@@ -575,6 +665,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VH2C3MZ659;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
@@ -588,6 +679,49 @@
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 				TEST_TARGET_NAME = EnviroLens;
 				XROS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		DAE36FE62DAE8C6F00D59FA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VH2C3MZ659;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nibm.EnviroLensUITestsNew;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "";
+				TEST_TARGET_NAME = EnviroLens;
+			};
+			name = Debug;
+		};
+		DAE36FE72DAE8C6F00D59FA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VH2C3MZ659;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nibm.EnviroLensUITestsNew;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "";
+				TEST_TARGET_NAME = EnviroLens;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -626,6 +760,15 @@
 			buildConfigurations = (
 				DA083B2B2D9523130038CD13 /* Debug */,
 				DA083B2C2D9523130038CD13 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAE36FE52DAE8C6F00D59FA6 /* Build configuration list for PBXNativeTarget "EnviroLensUITestsNew" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAE36FE62DAE8C6F00D59FA6 /* Debug */,
+				DAE36FE72DAE8C6F00D59FA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

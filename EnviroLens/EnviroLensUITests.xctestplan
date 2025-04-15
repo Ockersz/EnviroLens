@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "D02D82B5-9BBD-472F-866F-1DB61DA8E384",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:EnviroLens.xcodeproj",
+        "identifier" : "DA083B192D9523130038CD13",
+        "name" : "EnviroLensUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:EnviroLens.xcodeproj",
+        "identifier" : "DA083B0F2D9523130038CD13",
+        "name" : "EnviroLensTests"
+      }
+    }
+  ],
+  "version" : 1
+}
