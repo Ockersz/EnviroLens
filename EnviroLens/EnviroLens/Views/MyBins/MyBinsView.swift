@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct MyBinsView: View {
     @State private var isLoading = false
@@ -108,9 +109,9 @@ struct MyBinsView: View {
                 Button("Cancel", role: .cancel) {
                     newBinLabel = ""
                 }
-            } message: {
-                Text("Enter a location label for the new bin group.")
-            }            .onAppear {
+            }
+            .onAppear {
+                requestNotificationPermission()
                 fetchBinGroups()
             }
         }
@@ -142,6 +143,10 @@ struct MyBinsView: View {
                 let decoded = try JSONDecoder().decode([BinGroup].self, from: data)
                 DispatchQueue.main.async {
                     self.binGroups = decoded
+                    let hasFullBin = decoded.flatMap { $0.bins }.contains { $0.fillLevel > 70 }
+                    if hasFullBin {
+                        sendFullBinAlert()
+                    }
                 }
             } catch {
                 print("Decode error: \(error)")
@@ -204,6 +209,33 @@ struct MyBinsView: View {
             case 0..<40: return .green
             case 40..<70: return .orange
             default: return .red
+        }
+    }
+    
+    func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            if let error = error {
+                print("Permission error: \(error)")
+            }
+        }
+    }
+    
+    func sendFullBinAlert() {
+        let content = UNMutableNotificationContent()
+        content.title = "Bin Almost Full"
+        content.body = "One or more of your bins are over 70% full. Consider emptying them soon."
+        content.sound = .defaultCriticalSound(withAudioVolume: 100)
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString,
+                                            content: content,
+                                            trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Notification Error: \(error.localizedDescription)")
+            }
         }
     }
 }

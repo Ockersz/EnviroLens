@@ -141,9 +141,9 @@ struct DashboardView: View {
                     case .dispose: DisposeView()
                     case .bins: MyBinsView()
                     case .notifications: NotificationsView()
-//                    case .leaderboard: FullLeaderboardView()
-//                    case .mission: MissionView()
-                    default : Text("Error")
+                    case .leaderboard: LeaderboardView()
+                    case .mission: OurMissionView()
+                    //default : Text("Error")
                     
                 }
             }

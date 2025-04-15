@@ -13,6 +13,26 @@ exports.getUserStats = onRequest((req, res) => {
 });
 
 exports.getTopLeaderboard = onRequest((req, res) => {
+
+    const ifall = req.query?.type;
+
+    if(ifall && ifall === "all") {
+        return res.status(200).json({
+            leaders: [
+                { name: "Alice", score: 1000, rank: 1 },
+                { name: "Bob", score: 980, rank: 2 },
+                { name: "Charlie", score: 950, rank: 3 },
+                { name: "David", score: 940, rank: 4 },
+                { name: "Eve", score: 930, rank: 5 },
+                { name: "Frank", score: 920, rank: 6 },
+                { name: "Grace", score: 910, rank: 7 },
+                { name: "Heidi", score: 900, rank: 8 },
+                { name: "Ivan", score: 890, rank: 9 },
+                { name: "Judy", score: 880, rank: 10 }
+            ]
+        });
+    }
+
     const dummyData = {
         leaders: [
             { name: "Alice", score: 1000, rank: 1 },

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import UserNotifications
 
 @main
 struct EnviroLensApp: App {
@@ -15,6 +16,7 @@ struct EnviroLensApp: App {
     
     init() {
         FirebaseApp.configure()
+        UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
     }
     
     var body: some Scene {
