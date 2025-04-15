@@ -4,8 +4,6 @@
 //
 //  Created by Shahein Ockersz on 2025-04-10.
 //
-
-
 import SwiftUI
 
 struct MainTabView: View {
@@ -13,7 +11,7 @@ struct MainTabView: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            DashboardView()
+            DashboardView(selectedTab: $selectedTab)
                 .tabItem {
                     VStack {
                         Image(systemName: "house.fill")
@@ -21,7 +19,7 @@ struct MainTabView: View {
                     }
                 }
                 .tag(0)
-
+            
             ScanWasteView()
                 .tabItem {
                     VStack {
@@ -30,8 +28,8 @@ struct MainTabView: View {
                     }
                 }
                 .tag(1)
-
-            ScanWasteView()
+            
+            NearbyLocationsView()
                 .tabItem {
                     VStack {
                         Image(systemName: "magnifyingglass")
@@ -39,8 +37,8 @@ struct MainTabView: View {
                     }
                 }
                 .tag(2)
-
-            ScanWasteView()
+            
+            DisposeView()
                 .tabItem {
                     VStack {
                         Image(systemName: "trash.fill")
@@ -48,7 +46,7 @@ struct MainTabView: View {
                     }
                 }
                 .tag(3)
-
+            
             ScanWasteView()
                 .tabItem {
                     VStack {

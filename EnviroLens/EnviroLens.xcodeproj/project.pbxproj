@@ -435,6 +435,7 @@
 				INFOPLIST_FILE = EnviroLens/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to scan waste items.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app use face id to safely authenticate a user";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need your location to check for centers";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -476,6 +477,7 @@
 				INFOPLIST_FILE = EnviroLens/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to scan waste items.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app use face id to safely authenticate a user";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need your location to check for centers";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

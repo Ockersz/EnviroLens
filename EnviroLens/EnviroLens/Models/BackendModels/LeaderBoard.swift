@@ -12,7 +12,7 @@ struct LeaderBoard: Codable {
 }
 
 struct Leader: Codable, Identifiable {
-    var id = UUID()
+    let id = UUID()
     let name: String
     let score: Int
     let rank: Int

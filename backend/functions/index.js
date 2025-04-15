@@ -197,3 +197,291 @@ exports.getBinDisposalGuidlines = onRequest((req, res) => {
     // Return the guidelines for the specified bin type
     res.status(200).json(guidelines[binType]);
 });
+
+
+exports.getDisposalCenters = onRequest(async (req, res) => {
+    const dummyData = [
+        {
+          id: "1",
+          name: "Colombo Municipal Waste Center",
+          latitude: 6.9271,
+          longitude: 79.8612,
+          acceptedTypes: ["organic", "plastic", "glass"],
+          hours: {
+            weekday: "8:00 AM - 6:00 PM",
+            saturday: "9:00 AM - 4:00 PM",
+            sunday: "Closed"
+          }
+        },
+        {
+          id: "2",
+          name: "Borella Recycling Yard",
+          latitude: 6.9187,
+          longitude: 79.8788,
+          acceptedTypes: ["paper", "cardboard"],
+          hours: {
+            weekday: "9:00 AM - 5:00 PM",
+            saturday: "10:00 AM - 2:00 PM",
+            sunday: "Closed"
+          }
+        },
+        {
+          id: "3",
+          name: "Wellawatte E-Waste Center",
+          latitude: 6.8772,
+          longitude: 79.8615,
+          acceptedTypes: ["e-waste", "batteries"],
+          hours: {
+            weekday: "10:00 AM - 6:00 PM",
+            saturday: "10:00 AM - 3:00 PM",
+            sunday: "Closed"
+          }
+        },
+        {
+          id: "4",
+          name: "Nugegoda Waste Sorting Facility",
+          latitude: 6.8723,
+          longitude: 79.8865,
+          acceptedTypes: ["organic", "glass"],
+          hours: {
+            weekday: "7:00 AM - 4:00 PM",
+            saturday: "8:00 AM - 1:00 PM",
+            sunday: "Closed"
+          }
+        },
+        {
+          id: "5",
+          name: "Dehiwala Eco Drop-off",
+          latitude: 6.8446,
+          longitude: 79.8655,
+          acceptedTypes: ["plastic", "paper"],
+          hours: {
+            weekday: "9:00 AM - 5:30 PM",
+            saturday: "9:00 AM - 1:00 PM",
+            sunday: "Closed"
+          }
+        },
+        {
+          id: "6",
+          name: "Kollupitiya Green Hub",
+          latitude: 6.9167,
+          longitude: 79.8486,
+          acceptedTypes: ["e-waste", "plastic", "batteries"],
+          hours: {
+            weekday: "10:00 AM - 6:00 PM",
+            saturday: "10:00 AM - 4:00 PM",
+            sunday: "Closed"
+          }
+        },
+        {
+          id: "7",
+          name: "Thimbirigasyaya Waste Depot",
+          latitude: 6.9028,
+          longitude: 79.8723,
+          acceptedTypes: ["glass", "organic", "paper"],
+          hours: {
+            weekday: "8:00 AM - 4:00 PM",
+            saturday: "8:00 AM - 12:00 PM",
+            sunday: "Closed"
+          }
+        },
+        {
+          id: "8",
+          name: "Rajagiriya Sorting Point",
+          latitude: 6.9124,
+          longitude: 79.8912,
+          acceptedTypes: ["e-waste", "plastic"],
+          hours: {
+            weekday: "9:30 AM - 6:00 PM",
+            saturday: "9:00 AM - 3:00 PM",
+            sunday: "Closed"
+          }
+        },
+        {
+          id: "9",
+          name: "Pelawatte Eco Center",
+          latitude: 6.8892,
+          longitude: 79.9301,
+          acceptedTypes: ["organic", "cardboard", "glass"],
+          hours: {
+            weekday: "7:30 AM - 5:00 PM",
+            saturday: "8:00 AM - 2:00 PM",
+            sunday: "Closed"
+          }
+        },
+        {
+          id: "10",
+          name: "Battaramulla Central Waste",
+          latitude: 6.9021,
+          longitude: 79.9183,
+          acceptedTypes: ["paper", "plastic", "metal"],
+          hours: {
+            weekday: "8:30 AM - 5:30 PM",
+            saturday: "9:00 AM - 1:00 PM",
+            sunday: "Closed"
+          }
+        },
+        {
+          id: "11",
+          name: "Ragama Urban Council Recycling Yard",
+          latitude: 7.0272,
+          longitude: 79.9483,
+          acceptedTypes: ["plastic", "metal", "organic"],
+          hours: {
+            weekday: "8:00 AM - 5:00 PM",
+            saturday: "9:00 AM - 1:00 PM",
+            sunday: "Closed"
+          }
+        },
+        {
+          id: "12",
+          name: "Mahabage Community Waste Drop",
+          latitude: 7.0085,
+          longitude: 79.9260,
+          acceptedTypes: ["paper", "glass"],
+          hours: {
+            weekday: "9:00 AM - 4:00 PM",
+            saturday: "9:00 AM - 12:00 PM",
+            sunday: "Closed"
+          }
+        },
+        {
+          id: "13",
+          name: "Dalugama Eco-Friendly Collection Point",
+          latitude: 7.0159,
+          longitude: 79.9392,
+          acceptedTypes: ["e-waste", "batteries", "plastic"],
+          hours: {
+            weekday: "8:00 AM - 5:30 PM",
+            saturday: "9:00 AM - 2:00 PM",
+            sunday: "Closed"
+          }
+        }
+      ];
+      
+
+  res.status(200).json(dummyData);
+});
+
+
+exports.getDisposalHistory = onRequest((req, res) => {
+  const dummyData = [
+    {
+      date: "01/03/2025",
+      categories: [
+        {
+          type: "Organic",
+          weight: 10,
+          iconName: "RCanBrwn"
+        },
+        {
+          type: "Paper",
+          weight: 12,
+          iconName: "RCanBlu"
+        },
+        {
+          type: "Glass/plastic",
+          weight: 2,
+          iconName: "RCanGr"
+        },
+        {
+          type: "Miscellaneous",
+          weight: 1,
+          iconName: "RCanBlck",
+        }
+      ]
+    },
+    {
+      date: "15/02/2025",
+      categories: [
+        {
+          type: "Organic",
+          weight: 7,
+          iconName: "RCanBrwn",
+        },
+        {
+          type: "Plastic",
+          weight: 3,
+          iconName: "RCanGr"
+        }
+      ]
+    }
+  ];
+
+  res.status(200).json(dummyData);
+});
+
+exports.getSmartBins = onRequest((req, res) => {
+    const binsByLocation = [
+      {
+        location: "Floor 1 - Kitchen",
+        bins: [
+          { type: "Organic", fillLevel: 100, iconName: "RCanBrwn" },
+          { type: "Paper", fillLevel: 51, iconName: "RCanBlu" },
+          { type: "Glass/plastic", fillLevel: 10, iconName: "RCanGr" },
+          { type: "Miscellaneous", fillLevel: 70, iconName: "RCanBlck" }
+        ]
+      },
+      {
+        location: "Outdoor Bins",
+        bins: [
+          { type: "Organic", fillLevel: 8, iconName: "RCanBrwn" },
+          { type: "Paper", fillLevel: 70, iconName: "RCanBlu" },
+          { type: "Glass/plastic", fillLevel: 60, iconName: "RCanGr" },
+          { type: "Miscellaneous", fillLevel: 48, iconName: "RCanBlck" }
+        ]
+      }
+    ];
+  
+    res.status(200).json(binsByLocation);
+  });
+
+  exports.addSmartBin = onRequest((req, res) => {
+    if (req.method !== "POST") {
+      return res.status(405).send("Method Not Allowed");
+    }
+  
+    const { code, label } = req.body;
+  
+    if (!code || !label) {
+      return res.status(400).json({ error: "Missing code or label" });
+    }
+  
+    // existing data
+    const existingBins = [
+      {
+        location: "Floor 1 - Kitchen",
+        bins: [
+          { type: "Organic", fillLevel: 100, iconName: "RCanBrwn" },
+          { type: "Paper", fillLevel: 51, iconName: "RCanBlu" },
+          { type: "Glass/plastic", fillLevel: 10, iconName: "RCanGr" },
+          { type: "Miscellaneous", fillLevel: 70, iconName: "RCanBlck" }
+        ]
+      },
+      {
+        location: "Outdoor Bins",
+        bins: [
+          { type: "Organic", fillLevel: 8, iconName: "RCanBrwn" },
+          { type: "Paper", fillLevel: 70, iconName: "RCanBlu" },
+          { type: "Glass/plastic", fillLevel: 60, iconName: "RCanGr" },
+          { type: "Miscellaneous", fillLevel: 48, iconName: "RCanBlck" }
+        ]
+      }
+    ];
+  
+    const newBinGroup = {
+      location: label,
+      bins: [
+        { type: "Organic", fillLevel: 0, iconName: "RCanBrwn" },
+        { type: "Paper", fillLevel: 0, iconName: "RCanBlu" },
+        { type: "Glass/plastic", fillLevel: 0, iconName: "RCanGr" },
+        { type: "Miscellaneous", fillLevel: 0, iconName: "RCanBlck" }
+      ]
+    };
+  
+    const allBins = [...existingBins, newBinGroup];
+  
+    return res.status(200).json(allBins);
+  });
+  
+

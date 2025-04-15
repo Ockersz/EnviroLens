@@ -120,7 +120,7 @@ struct LoginView: View {
                 RegisterView()
             }
             .navigationDestination(isPresented: $navigateToHome) {
-                DashboardView()
+                MainTabView()
             }
             .onReceive(biometricAuth.$isAuthenticated) { isAuthenticated in
                 if isAuthenticated {
