@@ -12,16 +12,12 @@ struct ContentView: View {
     @StateObject var authViewModel = AuthViewModel()
     
     var body: some View{
-        if authViewModel.user != nil {
-            MainTabView()
-        } else {
-            LoginView(authViewModel: authViewModel)
+        NavigationStack{
+            if authViewModel.user != nil {
+                MainTabView()
+            } else {
+                LoginView(authViewModel: authViewModel)
+            }
         }
     }
-}
-
-
-
-#Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
