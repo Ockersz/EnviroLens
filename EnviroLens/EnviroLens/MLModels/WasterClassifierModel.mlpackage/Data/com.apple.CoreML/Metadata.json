@@ -1,0 +1,12 @@
+{
+  "MLModelVersionStringKey" : "--",
+  "MLModelDescriptionKey" : "This classifier will attempt to determine the type of waster material for sorting puporses.",
+  "MLModelCreatorDefinedKey" : {
+    "com.apple.createml.version" : "15.3.1",
+    "com.apple.createml.app.tag" : "150.3",
+    "com.apple.coreml.model.preview.type" : "imageClassifier",
+    "com.apple.createml.app.version" : "6.1"
+  },
+  "MLModelAuthorKey" : "Shahein Ockersz",
+  "MLModelLicenseKey" : "--"
+}

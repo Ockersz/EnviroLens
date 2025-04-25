@@ -6,6 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DAE36F402DA7CA7C00D59FA6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DAE36F3F2DA7CA7C00D59FA6 /* FirebaseAnalytics */; };
+		DAE36F422DA7CA7C00D59FA6 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = DAE36F412DA7CA7C00D59FA6 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		DAE36F442DA7CA7C00D59FA6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DAE36F432DA7CA7C00D59FA6 /* FirebaseAuth */; };
+		DAE36F4B2DA8CCDC00D59FA6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DAE36F4A2DA8CCDC00D59FA6 /* FirebaseFirestore */; };
+		DAE36F4D2DA8CD4F00D59FA6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DAE36F4C2DA8CD4F00D59FA6 /* FirebaseFirestore */; };
+		DAE36F4F2DA8CD4F00D59FA6 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = DAE36F4E2DA8CD4F00D59FA6 /* FirebaseFirestoreCombine-Community */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		DA083B112D9523130038CD13 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,17 +30,52 @@
 			remoteGlobalIDString = DA083AF92D9523120038CD13;
 			remoteInfo = EnviroLens;
 		};
+		DAE36FE32DAE8C6F00D59FA6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DA083AF22D9523120038CD13 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA083AF92D9523120038CD13;
+			remoteInfo = EnviroLens;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		DA083AFA2D9523120038CD13 /* EnviroLens.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnviroLens.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA083B102D9523130038CD13 /* EnviroLensTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnviroLensTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA083B1A2D9523130038CD13 /* EnviroLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnviroLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAE36FDD2DAE8C6F00D59FA6 /* EnviroLensUITestsNew.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EnviroLensUITestsNew.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		DAE36F552DA8F4A200D59FA6 /* Exceptions for "EnviroLens" folder in "EnviroLens" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = DA083AF92D9523120038CD13 /* EnviroLens */;
+		};
+		DAE36FD72DAE8B6300D59FA6 /* Exceptions for "EnviroLensUITests" folder in "EnviroLensTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				LoginViewUITests.swift,
+			);
+			target = DA083B0F2D9523130038CD13 /* EnviroLensTests */;
+		};
+		DAE36FD82DAE8B6300D59FA6 /* Exceptions for "EnviroLensUITests" folder in "EnviroLensUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				LoginViewUITests.swift,
+			);
+			target = DA083B192D9523130038CD13 /* EnviroLensUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		DA083AFC2D9523120038CD13 /* EnviroLens */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				DAE36F552DA8F4A200D59FA6 /* Exceptions for "EnviroLens" folder in "EnviroLens" target */,
+			);
 			path = EnviroLens;
 			sourceTree = "<group>";
 		};
@@ -42,7 +86,16 @@
 		};
 		DA083B1D2D9523130038CD13 /* EnviroLensUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				DAE36FD72DAE8B6300D59FA6 /* Exceptions for "EnviroLensUITests" folder in "EnviroLensTests" target */,
+				DAE36FD82DAE8B6300D59FA6 /* Exceptions for "EnviroLensUITests" folder in "EnviroLensUITests" target */,
+			);
 			path = EnviroLensUITests;
+			sourceTree = "<group>";
+		};
+		DAE36FDE2DAE8C6F00D59FA6 /* EnviroLensUITestsNew */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = EnviroLensUITestsNew;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -52,6 +105,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAE36F402DA7CA7C00D59FA6 /* FirebaseAnalytics in Frameworks */,
+				DAE36F4B2DA8CCDC00D59FA6 /* FirebaseFirestore in Frameworks */,
+				DAE36F442DA7CA7C00D59FA6 /* FirebaseAuth in Frameworks */,
+				DAE36F4F2DA8CD4F00D59FA6 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				DAE36F4D2DA8CD4F00D59FA6 /* FirebaseFirestore in Frameworks */,
+				DAE36F422DA7CA7C00D59FA6 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +128,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DAE36FDA2DAE8C6F00D59FA6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +144,7 @@
 				DA083AFC2D9523120038CD13 /* EnviroLens */,
 				DA083B132D9523130038CD13 /* EnviroLensTests */,
 				DA083B1D2D9523130038CD13 /* EnviroLensUITests */,
+				DAE36FDE2DAE8C6F00D59FA6 /* EnviroLensUITestsNew */,
 				DA083AFB2D9523120038CD13 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,6 +155,7 @@
 				DA083AFA2D9523120038CD13 /* EnviroLens.app */,
 				DA083B102D9523130038CD13 /* EnviroLensTests.xctest */,
 				DA083B1A2D9523130038CD13 /* EnviroLensUITests.xctest */,
+				DAE36FDD2DAE8C6F00D59FA6 /* EnviroLensUITestsNew.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,6 +180,12 @@
 			);
 			name = EnviroLens;
 			packageProductDependencies = (
+				DAE36F3F2DA7CA7C00D59FA6 /* FirebaseAnalytics */,
+				DAE36F412DA7CA7C00D59FA6 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				DAE36F432DA7CA7C00D59FA6 /* FirebaseAuth */,
+				DAE36F4A2DA8CCDC00D59FA6 /* FirebaseFirestore */,
+				DAE36F4C2DA8CD4F00D59FA6 /* FirebaseFirestore */,
+				DAE36F4E2DA8CD4F00D59FA6 /* FirebaseFirestoreCombine-Community */,
 			);
 			productName = EnviroLens;
 			productReference = DA083AFA2D9523120038CD13 /* EnviroLens.app */;
@@ -163,6 +237,29 @@
 			productReference = DA083B1A2D9523130038CD13 /* EnviroLensUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		DAE36FDC2DAE8C6F00D59FA6 /* EnviroLensUITestsNew */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAE36FE52DAE8C6F00D59FA6 /* Build configuration list for PBXNativeTarget "EnviroLensUITestsNew" */;
+			buildPhases = (
+				DAE36FD92DAE8C6F00D59FA6 /* Sources */,
+				DAE36FDA2DAE8C6F00D59FA6 /* Frameworks */,
+				DAE36FDB2DAE8C6F00D59FA6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DAE36FE42DAE8C6F00D59FA6 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				DAE36FDE2DAE8C6F00D59FA6 /* EnviroLensUITestsNew */,
+			);
+			name = EnviroLensUITestsNew;
+			packageProductDependencies = (
+			);
+			productName = EnviroLensUITestsNew;
+			productReference = DAE36FDD2DAE8C6F00D59FA6 /* EnviroLensUITestsNew.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +281,10 @@
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = DA083AF92D9523120038CD13;
 					};
+					DAE36FDC2DAE8C6F00D59FA6 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = DA083AF92D9523120038CD13;
+					};
 				};
 			};
 			buildConfigurationList = DA083AF52D9523120038CD13 /* Build configuration list for PBXProject "EnviroLens" */;
@@ -195,6 +296,9 @@
 			);
 			mainGroup = DA083AF12D9523120038CD13;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DAE36F3E2DA7CA7C00D59FA6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DA083AFB2D9523120038CD13 /* Products */;
 			projectDirPath = "";
@@ -203,6 +307,7 @@
 				DA083AF92D9523120038CD13 /* EnviroLens */,
 				DA083B0F2D9523130038CD13 /* EnviroLensTests */,
 				DA083B192D9523130038CD13 /* EnviroLensUITests */,
+				DAE36FDC2DAE8C6F00D59FA6 /* EnviroLensUITestsNew */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +328,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DA083B182D9523130038CD13 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAE36FDB2DAE8C6F00D59FA6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +365,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DAE36FD92DAE8C6F00D59FA6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +384,11 @@
 			isa = PBXTargetDependency;
 			target = DA083AF92D9523120038CD13 /* EnviroLens */;
 			targetProxy = DA083B1B2D9523130038CD13 /* PBXContainerItemProxy */;
+		};
+		DAE36FE42DAE8C6F00D59FA6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA083AF92D9523120038CD13 /* EnviroLens */;
+			targetProxy = DAE36FE32DAE8C6F00D59FA6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -392,8 +516,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"EnviroLens/Preview Content\"";
+				DEVELOPMENT_TEAM = VH2C3MZ659;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EnviroLens/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to scan waste items.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app use face id to safely authenticate a user";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need your location to check for centers";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -426,11 +555,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = EnviroLens/EnviroLens.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"EnviroLens/Preview Content\"";
+				DEVELOPMENT_TEAM = VH2C3MZ659;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EnviroLens/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to scan waste items.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app use face id to safely authenticate a user";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need your location to check for centers";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -463,6 +598,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VH2C3MZ659;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
@@ -485,6 +621,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VH2C3MZ659;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
@@ -506,6 +643,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VH2C3MZ659;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
@@ -527,6 +665,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VH2C3MZ659;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MACOSX_DEPLOYMENT_TARGET = 15.2;
@@ -540,6 +679,49 @@
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 				TEST_TARGET_NAME = EnviroLens;
 				XROS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		DAE36FE62DAE8C6F00D59FA6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VH2C3MZ659;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nibm.EnviroLensUITestsNew;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "";
+				TEST_TARGET_NAME = EnviroLens;
+			};
+			name = Debug;
+		};
+		DAE36FE72DAE8C6F00D59FA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VH2C3MZ659;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nibm.EnviroLensUITestsNew;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "";
+				TEST_TARGET_NAME = EnviroLens;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -582,7 +764,57 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		DAE36FE52DAE8C6F00D59FA6 /* Build configuration list for PBXNativeTarget "EnviroLensUITestsNew" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAE36FE62DAE8C6F00D59FA6 /* Debug */,
+				DAE36FE72DAE8C6F00D59FA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DAE36F3E2DA7CA7C00D59FA6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DAE36F3F2DA7CA7C00D59FA6 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAE36F3E2DA7CA7C00D59FA6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		DAE36F412DA7CA7C00D59FA6 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAE36F3E2DA7CA7C00D59FA6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		DAE36F432DA7CA7C00D59FA6 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAE36F3E2DA7CA7C00D59FA6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		DAE36F4A2DA8CCDC00D59FA6 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseFirestore;
+		};
+		DAE36F4C2DA8CD4F00D59FA6 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseFirestore;
+		};
+		DAE36F4E2DA8CD4F00D59FA6 /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DA083AF22D9523120038CD13 /* Project object */;
 }
