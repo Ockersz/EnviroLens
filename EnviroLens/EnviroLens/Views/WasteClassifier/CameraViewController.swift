@@ -24,11 +24,13 @@ class CameraViewController: UIViewController {
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
+    // Setup camera after view loading is done to avoid view breaks
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCamera()
     }
     
+    //Camera setting up process - Make sure you have given permission to the camera
     private func setupCamera() {
         captureSession = AVCaptureSession()
         captureSession.beginConfiguration()
@@ -64,6 +66,7 @@ class CameraViewController: UIViewController {
         }
     }
     
+    // Capture the frame and detect the waste product on the image
     func detectAndCaptureFrame(sampleBuffer: CMSampleBuffer) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         
@@ -76,6 +79,7 @@ class CameraViewController: UIViewController {
             }
         }
         
+        //load ML model
         guard let model = try? VNCoreMLModel(for: WasterClassifierModel().model) else {
             print("Error: Failed to load ML model.")
             return
@@ -86,6 +90,7 @@ class CameraViewController: UIViewController {
                   let firstResult = results.first,
                   let self = self else { return }
             
+            //Confident should be greater than 50% later this could be increased based on the dataset
             DispatchQueue.main.async {
                 if firstResult.confidence > 0.5 {
                     self.viewModel.detectedObjects = firstResult.identifier
@@ -112,6 +117,7 @@ class CameraViewController: UIViewController {
         }
     }
     
+    //Change text color to fit to the background set from the camera view for usability
     private func computeAverageBrightness(from image: CIImage) -> Bool {
         let extent = image.extent
         let inputExtent = CIVector(x: extent.origin.x, y: extent.origin.y, z: extent.size.width, w: extent.size.height)

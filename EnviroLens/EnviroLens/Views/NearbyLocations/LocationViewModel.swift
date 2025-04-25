@@ -17,13 +17,15 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userLocation: CLLocationCoordinate2D?
     
     private let locationManager = CLLocationManager()
+    private let session: URLSession
     
     private let gotoColomboRegion = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 6.9271, longitude: 79.8612),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
     
-    override init() {
+    init(session: URLSession = .shared) {
+        self.session = session
         _region = Published(initialValue: gotoColomboRegion)
         super.init()
         setupLocationManager()
@@ -50,7 +52,6 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location update failed: \(error.localizedDescription)")
         DispatchQueue.main.async {
             self.region = self.gotoColomboRegion
         }
@@ -60,23 +61,21 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         isLoading = true
         
         guard let url = URL(string: "https://us-central1-envirolens-2ca53.cloudfunctions.net/getDisposalCenters") else {
-            print("Invalid URL")
             isLoading = false
             return
         }
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            defer { DispatchQueue.main.async { self.isLoading = false } }
+        session.dataTask(with: url) { data, _, error in
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
             
             if let error = error {
                 print("Error fetching disposal centers: \(error)")
                 return
             }
             
-            guard let data = data else {
-                print("No data received")
-                return
-            }
+            guard let data = data else { return }
             
             do {
                 let centers = try JSONDecoder().decode([DisposalCenter].self, from: data)

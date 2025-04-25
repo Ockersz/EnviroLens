@@ -240,6 +240,7 @@ struct RedeemView: View {
         }
     }
     
+    //Get the items for the redeem page
     func fetchRedeemItems() {
         guard let url = URL(string: "https://us-central1-envirolens-2ca53.cloudfunctions.net/getRedeemItems") else { return }
         isLoading = true
@@ -258,6 +259,7 @@ struct RedeemView: View {
         }.resume()
     }
     
+    //Get user credits
     func fetchUserCredits() {
         guard let url = URL(string: "https://getuserstats-33s7emkdia-uc.a.run.app") else { return }
         
@@ -295,7 +297,7 @@ struct RedeemView: View {
         return total
     }
 
-    
+    // Push notification
     func sendRedemptionNotification() {
         let content = UNMutableNotificationContent()
         content.title = "Items Redeemed"

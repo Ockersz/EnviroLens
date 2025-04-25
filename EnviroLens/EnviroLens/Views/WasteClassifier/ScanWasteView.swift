@@ -15,7 +15,6 @@ struct ScanWasteView: View {
     
     private func getBinCategory(for wasteType: String) -> String {
         let lowerCaseType = wasteType.lowercased()
-        
         if lowerCaseType.contains("paper") {
             return "paper"
         } else if lowerCaseType.contains("organic") {
@@ -23,24 +22,21 @@ struct ScanWasteView: View {
         } else if lowerCaseType.contains("glass") || lowerCaseType.contains("plastic") {
             return "glass_plastic"
         } else {
-            // E-waste, automobile wastes, battery waste, light bulbs, metal waste
             return "miscellaneous"
         }
     }
     
     private func isBinEnabled(binType: String) -> Bool {
         let detectedWaste = cameraVM.detectedObjects.lowercased()
-        
         if detectedWaste.isEmpty {
             return true
         }
-        
         let binCategory = getBinCategory(for: detectedWaste)
         return binCategory == binType
     }
     
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             ZStack {
                 // Camera or Captured Frame
                 if let frozenImage = cameraVM.capturedImage {
@@ -49,10 +45,12 @@ struct ScanWasteView: View {
                         .scaledToFill()
                         .ignoresSafeArea(edges: .all)
                         .accessibilityIdentifier("CapturedImage")
+                        .accessibilityLabel("Captured Image Preview") // Add accesebility labels for voice over
                 } else {
                     CameraPreview(viewModel: cameraVM)
                         .edgesIgnoringSafeArea(.top)
                         .accessibilityIdentifier("CameraPreview")
+                        .accessibilityLabel("Live camera preview")
                 }
                 
                 VStack {
@@ -66,19 +64,24 @@ struct ScanWasteView: View {
                                 .background(.ultraThinMaterial)
                                 .cornerRadius(8)
                                 .accessibilityIdentifier("DetectedWasteLabel")
+                                .accessibilityLabel("Detected waste type")
+                                .accessibilityValue(cameraVM.detectedObjects)
+                                .accessibilityHint("This is the detected waste object")
+                            
                             Text("Confidence: \(String(format: "%.2f", cameraVM.confidence * 100))%")
                                 .font(.subheadline)
                                 .padding(8)
                                 .background(.ultraThinMaterial)
                                 .cornerRadius(8)
                                 .accessibilityIdentifier("ConfidenceLabel")
+                                .accessibilityLabel("Detection confidence")
+                                .accessibilityValue("\(String(format: "%.0f", cameraVM.confidence * 100)) percent")
                         }
                         .padding()
                     }
                     
                     Spacer()
                     
-                    // Buttons
                     HStack(spacing: 70) {
                         Button(action: {
                             cameraVM.capture()
@@ -90,6 +93,8 @@ struct ScanWasteView: View {
                                 .cornerRadius(8)
                         }
                         .accessibilityIdentifier("CaptureButton")
+                        .accessibilityLabel("Capture button")
+                        .accessibilityHint("Tap to capture the current image from the camera")
                         
                         Button(action: {
                             cameraVM.reset()
@@ -101,6 +106,8 @@ struct ScanWasteView: View {
                                 .cornerRadius(8)
                         }
                         .accessibilityIdentifier("ResetButton")
+                        .accessibilityLabel("Reset button")
+                        .accessibilityHint("Tap to reset the camera and clear detection")
                     }
                     .frame(width: 300)
                     .padding(.bottom, 20)
@@ -112,10 +119,13 @@ struct ScanWasteView: View {
                                 .font(.headline)
                                 .padding(.bottom, 10)
                                 .foregroundColor(.green)
+                                .accessibilityLabel("Dispose recommendation")
+                                .accessibilityValue("Please dispose in the \(detectedCategory.replacingOccurrences(of: "_", with: " ")) bin")
                         } else {
                             Text("Let us help you sort your waste.")
                                 .font(.headline)
                                 .padding(.bottom, 10)
+                                .accessibilityLabel("No detection yet")
                         }
                         
                         HStack(spacing: 10) {
@@ -152,9 +162,11 @@ struct ScanWasteView: View {
                             .background(.ultraThinMaterial)
                             .cornerRadius(12)
                             .accessibilityIdentifier("ProcessingIndicator")
+                            .accessibilityLabel("Processing")
                     }
                 }
                 
+                // Implement a shutter falsh to show that the image is captured.
                 if cameraVM.showShutterFlash {
                     Color.white
                         .opacity(0.8)
@@ -162,6 +174,7 @@ struct ScanWasteView: View {
                         .transition(.opacity)
                         .animation(.easeOut(duration: 0.2), value: cameraVM.showShutterFlash)
                         .accessibilityIdentifier("ShutterFlash")
+                        .accessibilityLabel("Camera shutter flash")
                 }
             }
             .toolbar {
@@ -171,6 +184,8 @@ struct ScanWasteView: View {
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(cameraVM.isDarkBackground ? .white : .black)
+                            .accessibilityAddTraits(.isHeader)
+                        
                         Text("Understand the waste you're recycling")
                             .font(.body)
                             .fontWeight(.light)
@@ -186,7 +201,8 @@ struct ScanWasteView: View {
                         .padding(.top)
                         .padding(.horizontal)
                         .padding(.bottom, 8)
-                        .accessibilityIdentifier("GuidelineTitle")
+                        .accessibilityAddTraits(.isHeader)
+                        .accessibilityLabel("Guidelines for \(selectedBinType ?? "") waste")
                     
                     if isLoadingGuidelines {
                         ProgressView("Loading...")
@@ -202,29 +218,18 @@ struct ScanWasteView: View {
                                             .font(.headline)
                                             .fontWeight(.semibold)
                                             .foregroundColor(.primary)
-                                            .lineLimit(nil)
-                                            .fixedSize(horizontal: false, vertical: true)
-                                            .accessibilityIdentifier("GuidelineTitle_\(guide.id)")
+                                            .accessibilityLabel(guide.title)
                                         
                                         Text(guide.description)
                                             .font(.body)
                                             .foregroundColor(.secondary)
                                             .multilineTextAlignment(.leading)
-                                            .lineLimit(nil)
-                                            .fixedSize(horizontal: false, vertical: true)
-                                            .accessibilityIdentifier("GuidelineDescription_\(guide.id)")
+                                            .accessibilityLabel(guide.description)
                                     }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.vertical, 16)
                                     .padding(.horizontal, 16)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .fill(Color(UIColor.systemBackground))
-                                    )
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                                    )
+                                    .background(RoundedRectangle(cornerRadius: 12).fill(Color(UIColor.systemBackground)))
+                                    .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray.opacity(0.3), lineWidth: 1))
                                     .padding(.bottom, 12)
                                 }
                             }
@@ -254,9 +259,13 @@ struct ScanWasteView: View {
                     .foregroundColor(.white)
             }
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(label) bin")
+        .accessibilityHint("Tap to view guidelines for \(label) waste")
         .accessibilityIdentifier("\(typeKey)BinButton")
     }
     
+    //Get guidlines based on the clicked bin.
     func fetchGuidelines(for binType: String) {
         guard let url = URL(string: "https://us-central1-envirolens-2ca53.cloudfunctions.net/getBinDisposalGuidlines?type=\(binType)") else {
             print("Invalid URL")

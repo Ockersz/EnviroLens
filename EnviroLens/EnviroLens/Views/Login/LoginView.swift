@@ -3,15 +3,13 @@ import LocalAuthentication
 
 struct LoginView: View {
     @ObservedObject var authViewModel: AuthViewModel
+    @StateObject private var loginViewModel: LoginViewModel
     @StateObject private var biometricAuth = BiometricAuthViewModel()
     
-    @State private var username = ""
-    @State private var password = ""
-    @State private var navigateToRegister = false
-    @State private var navigateToHome = false
-    @State private var errorMessage = ""
-    @State private var isLoading = false
-    @State private var attemptedLogin = false
+    init(authViewModel: AuthViewModel) {
+        self.authViewModel = authViewModel
+        _loginViewModel = StateObject(wrappedValue: LoginViewModel(authViewModel: authViewModel))
+    }
     
     var body: some View {
         NavigationStack {
@@ -35,14 +33,13 @@ struct LoginView: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(.primary)
                     .padding(.horizontal)
                     .padding(.top, 20)
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    customTextField("Username", text: $username)
+                    customTextField("Username", text: $loginViewModel.username)
                         .accessibilityIdentifier("usernameField")
-                    if attemptedLogin && !FormValidator.isValidUsername(username) {
+                    if loginViewModel.attemptedLogin && !FormValidator.isValidUsername(loginViewModel.username) {
                         Text("Please enter a valid username.")
                             .font(.caption)
                             .foregroundColor(.red)
@@ -51,9 +48,9 @@ struct LoginView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    secureCustomField("Password", text: $password)
+                    secureCustomField("Password", text: $loginViewModel.password)
                         .accessibilityIdentifier("passwordField")
-                    if attemptedLogin && password.isEmpty {
+                    if loginViewModel.attemptedLogin && loginViewModel.password.isEmpty {
                         Text("Password cannot be empty.")
                             .font(.caption)
                             .foregroundColor(.red)
@@ -61,15 +58,15 @@ struct LoginView: View {
                     }
                 }
                 
-                if !errorMessage.isEmpty {
-                    Text(errorMessage)
+                if !loginViewModel.errorMessage.isEmpty {
+                    Text(loginViewModel.errorMessage)
                         .foregroundColor(.red)
                         .font(.caption)
                         .padding(.horizontal)
                 }
                 
-                Button(action: handleLogin) {
-                    if isLoading {
+                Button(action: loginViewModel.handleLogin) {
+                    if loginViewModel.isLoading {
                         ProgressView()
                             .frame(maxWidth: .infinity, minHeight: 50)
                     } else {
@@ -77,20 +74,17 @@ struct LoginView: View {
                             .fontWeight(.semibold)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity, minHeight: 50)
-                            .background(
-                                 Color("PrBtnCol")
-                                
-                            )
+                            .background(Color("PrBtnCol"))
                             .cornerRadius(8)
                     }
                 }
                 .padding(.horizontal)
                 .padding(.top, 10)
-                .disabled(isLoading)
+                .disabled(loginViewModel.isLoading)
                 .accessibilityIdentifier("loginButton")
                 
-                if !isLoading {
-                    Button(action: handleBiometricLogin) {
+                if !loginViewModel.isLoading {
+                    Button(action: biometricAuth.authenticate) {
                         HStack {
                             Image(systemName: "faceid")
                             Text("Login with Face ID")
@@ -105,12 +99,11 @@ struct LoginView: View {
                     .padding(.top, 4)
                     .accessibilityIdentifier("biometricLoginButton")
                     
-                    
                     HStack {
                         Text("New member?")
                             .foregroundColor(.secondary)
                         Button("Sign Up") {
-                            navigateToRegister = true
+                            loginViewModel.navigateToRegister = true
                         }
                         .foregroundColor(.blue)
                     }
@@ -120,28 +113,30 @@ struct LoginView: View {
             }
             .padding(.top)
             .background(Color(.systemBackground))
-            .navigationDestination(isPresented: $navigateToRegister) {
+            .navigationDestination(isPresented: $loginViewModel.navigateToRegister) {
                 RegisterView()
                     .accessibilityIdentifier("RegisterView")
             }
-            .navigationDestination(isPresented: $navigateToHome) {
+            .navigationDestination(isPresented: $loginViewModel.navigateToHome) {
                 MainTabView()
                     .accessibilityIdentifier("MainTabView")
             }
             .onReceive(biometricAuth.$isAuthenticated) { isAuthenticated in
                 if isAuthenticated {
                     if let credentials = KeychainManager.retrieve() {
-                        isLoading = true
+                        loginViewModel.isLoading = true
                         authViewModel.signIn(email: credentials.email, password: credentials.password) { success, error in
-                            isLoading = false
-                            if let error = error {
-                                self.errorMessage = error.localizedDescription
-                            } else {
-                                navigateToHome = true
+                            DispatchQueue.main.async {
+                                loginViewModel.isLoading = false
+                                if let error = error {
+                                    loginViewModel.errorMessage = error.localizedDescription
+                                } else {
+                                    loginViewModel.navigateToHome = true
+                                }
                             }
                         }
                     } else {
-                        self.errorMessage = "No saved credentials found."
+                        loginViewModel.errorMessage = "No saved credentials found."
                     }
                 }
             }
@@ -153,7 +148,6 @@ struct LoginView: View {
     
     func customTextField(_ placeholder: String, text: Binding<String>, keyboardType: UIKeyboardType = .default) -> some View {
         TextField(placeholder, text: text)
-            .accessibilityIdentifier("usernameField")
             .keyboardType(keyboardType)
             .autocapitalization(.none)
             .disableAutocorrection(true)
@@ -166,37 +160,10 @@ struct LoginView: View {
     
     func secureCustomField(_ placeholder: String, text: Binding<String>) -> some View {
         SecureField(placeholder, text: text)
-            .accessibilityIdentifier("passwordField")
             .padding()
             .frame(height: 50)
             .background(Color(.secondarySystemBackground))
             .cornerRadius(8)
             .padding(.horizontal)
-    }
-    
-    func formIsValid() -> Bool {
-        FormValidator.isValidUsername(username) && !password.isEmpty
-    }
-    
-    func handleLogin() {
-        attemptedLogin = true
-        guard formIsValid() else { return }
-        
-        isLoading = true
-        errorMessage = ""
-        
-        authViewModel.signInWithUsername(username: username, password: password) { success, error in
-            isLoading = false
-            if let error = error {
-                self.errorMessage = error.localizedDescription
-            } else {
-                _ = KeychainManager.save(email: authViewModel.lastSignedInEmail ?? "", password: password)
-                navigateToHome = true
-            }
-        }
-    }
-    
-    func handleBiometricLogin() {
-        biometricAuth.authenticate()
     }
 }

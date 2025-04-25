@@ -12,12 +12,10 @@ struct ContentView: View {
     @StateObject var authViewModel = AuthViewModel()
     
     var body: some View{
-        NavigationStack{
-            if authViewModel.user != nil {
-                MainTabView()
-            } else {
-                LoginView(authViewModel: authViewModel)
-            }
+        if authViewModel.user != nil {
+            MainTabView()
+        } else {
+            LoginView(authViewModel: authViewModel)
         }
     }
 }

@@ -1,29 +1,14 @@
 import SwiftUI
-import FirebaseAuth
-import FirebaseFirestore
 
 struct RegisterView: View {
-    @State private var name = ""
-    @State private var username = ""
-    @State private var email = ""
-    @State private var password = ""
-    @State private var confirmPassword = ""
-    @State private var selectedArea = "Select Area"
-    @State private var acceptTerms = false
-    @State private var isShowingAreaDialog = false
-    @State private var isLoading = false
-    @State private var errorMessage = ""
-    @State private var attemptedRegister = false
-    
+    @StateObject private var viewModel = RegisterViewModel()
     @Environment(\.dismiss) var dismiss
-    
-    let areas = ["Colombo", "Galle", "Kandy", "Jaffna", "Matara"]
     
     var body: some View {
         ScrollView {
             Color.clear
                 .accessibilityIdentifier("RegisterView")
-
+            
             VStack(spacing: 16) {
                 Image("RecycleBadge")
                     .resizable()
@@ -38,68 +23,52 @@ struct RegisterView: View {
                     .padding(.horizontal)
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    customTextField("Name", text: $name)
-                    if attemptedRegister && !FormValidator.isValidName(name) {
-                        Text("Name cannot be empty.")
-                            .font(.caption)
-                            .foregroundColor(.red)
-                            .padding(.horizontal)
+                    customTextField("Name", text: $viewModel.name)
+                    if viewModel.attemptedRegister && !FormValidator.isValidName(viewModel.name) {
+                        validationMessage("Name cannot be empty.")
                     }
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    customTextField("Username", text: $username)
-                    if attemptedRegister && !FormValidator.isValidUsername(username) {
-                        Text("Username must be 3–15 characters, alphanumeric or underscore.")
-                            .font(.caption)
-                            .foregroundColor(.red)
-                            .padding(.horizontal)
-                    } else if attemptedRegister && !FormValidator.isUsernameAllowed(username) {
-                        Text("This username is reserved. Please choose another.")
-                            .font(.caption)
-                            .foregroundColor(.red)
-                            .padding(.horizontal)
+                    customTextField("Username", text: $viewModel.username)
+                    if viewModel.attemptedRegister {
+                        if !FormValidator.isValidUsername(viewModel.username) {
+                            validationMessage("Username must be 3–15 characters, alphanumeric or underscore.")
+                        } else if !FormValidator.isUsernameAllowed(viewModel.username) {
+                            validationMessage("This username is reserved. Please choose another.")
+                        }
                     }
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    customTextField("Email", text: $email, keyboardType: .emailAddress)
-                    if attemptedRegister && !FormValidator.isValidEmail(email) {
-                        Text("Please enter a valid email address.")
-                            .font(.caption)
-                            .foregroundColor(.red)
-                            .padding(.horizontal)
+                    customTextField("Email", text: $viewModel.email, keyboardType: .emailAddress)
+                    if viewModel.attemptedRegister && !FormValidator.isValidEmail(viewModel.email) {
+                        validationMessage("Please enter a valid email address.")
                     }
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    secureCustomField("Password", text: $password)
+                    secureCustomField("Password", text: $viewModel.password)
                         .accessibilityIdentifier("PwdField")
-                    if attemptedRegister && !FormValidator.isStrongPassword(password) {
-                        Text("Password must be 8+ chars, include upper/lowercase, number & special char.")
-                            .font(.caption)
-                            .foregroundColor(.red)
-                            .padding(.horizontal)
+                    if viewModel.attemptedRegister && !FormValidator.isStrongPassword(viewModel.password) {
+                        validationMessage("Password must be 8+ chars, include upper/lowercase, number & special char.")
                     }
                 }
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    secureCustomField("Confirm Password", text: $confirmPassword)
+                    secureCustomField("Confirm Password", text: $viewModel.confirmPassword)
                         .accessibilityIdentifier("ConfField")
-                    if attemptedRegister && !FormValidator.passwordsMatch(password, confirmPassword) {
-                        Text("Passwords do not match.")
-                            .font(.caption)
-                            .foregroundColor(.red)
-                            .padding(.horizontal)
+                    if viewModel.attemptedRegister && !FormValidator.passwordsMatch(viewModel.password, viewModel.confirmPassword) {
+                        validationMessage("Passwords do not match.")
                     }
                 }
                 
                 Button(action: {
-                    isShowingAreaDialog = true
+                    viewModel.isShowingAreaDialog = true
                 }) {
                     HStack {
-                        Text(selectedArea)
-                            .foregroundColor(selectedArea == "Select Area" ? .gray : .primary)
+                        Text(viewModel.selectedArea)
+                            .foregroundColor(viewModel.selectedArea == "Select Area" ? .gray : .primary)
                         Spacer()
                         Image(systemName: "chevron.down")
                             .foregroundColor(.gray)
@@ -110,26 +79,23 @@ struct RegisterView: View {
                     .cornerRadius(8)
                 }
                 .padding(.horizontal)
-                .confirmationDialog("Select Your Area", isPresented: $isShowingAreaDialog) {
-                    ForEach(areas, id: \.self) { area in
+                .confirmationDialog("Select Your Area", isPresented: $viewModel.isShowingAreaDialog) {
+                    ForEach(viewModel.areas, id: \.self) { area in
                         Button(area) {
-                            selectedArea = area
+                            viewModel.selectedArea = area
                         }
                     }
                 }
                 
-                if attemptedRegister && selectedArea == "Select Area" {
-                    Text("Please select an area.")
-                        .font(.caption)
-                        .foregroundColor(.red)
-                        .padding(.horizontal)
+                if viewModel.attemptedRegister && viewModel.selectedArea == "Select Area" {
+                    validationMessage("Please select an area.")
                 }
                 
                 HStack(alignment: .top) {
                     Button(action: {
-                        acceptTerms.toggle()
+                        viewModel.acceptTerms.toggle()
                     }) {
-                        Image(systemName: acceptTerms ? "checkmark.square" : "square")
+                        Image(systemName: viewModel.acceptTerms ? "checkmark.square" : "square")
                             .foregroundColor(Color("PrBtnCol"))
                     }
                     
@@ -142,22 +108,23 @@ struct RegisterView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
                 
-                if attemptedRegister && !acceptTerms {
-                    Text("You must accept the terms and privacy policy.")
-                        .font(.caption)
-                        .foregroundColor(.red)
-                        .padding(.horizontal)
+                if viewModel.attemptedRegister && !viewModel.acceptTerms {
+                    validationMessage("You must accept the terms and privacy policy.")
                 }
                 
-                if attemptedRegister && !errorMessage.isEmpty {
-                    Text(errorMessage)
+                if viewModel.attemptedRegister && !viewModel.errorMessage.isEmpty {
+                    Text(viewModel.errorMessage)
                         .foregroundColor(.red)
                         .font(.caption)
                         .padding(.horizontal)
                 }
                 
-                Button(action: registerUser) {
-                    if isLoading {
+                Button(action: {
+                    viewModel.registerUser {
+                        dismiss()
+                    }
+                }) {
+                    if viewModel.isLoading {
                         ProgressView()
                             .frame(maxWidth: .infinity, minHeight: 50)
                     } else {
@@ -171,7 +138,7 @@ struct RegisterView: View {
                 }
                 .padding(.horizontal)
                 .padding(.top, 10)
-                .disabled(isLoading)
+                .disabled(viewModel.isLoading)
                 .accessibilityIdentifier("RegisterButton")
                 
                 HStack {
@@ -192,6 +159,7 @@ struct RegisterView: View {
         .navigationBarBackButtonHidden(true)
     }
     
+    // MARK: - Custom Field Components    
     func customTextField(_ placeholder: String, text: Binding<String>, keyboardType: UIKeyboardType = .default) -> some View {
         TextField(placeholder, text: text)
             .keyboardType(keyboardType)
@@ -214,79 +182,10 @@ struct RegisterView: View {
             .accessibilityIdentifier(placeholder)
     }
     
-    func formIsValid() -> Bool {
-        FormValidator.isValidName(name) &&
-        FormValidator.isValidUsername(username) &&
-        FormValidator.isUsernameAllowed(username) &&
-        FormValidator.isValidEmail(email) &&
-        FormValidator.isStrongPassword(password) &&
-        FormValidator.passwordsMatch(password, confirmPassword) &&
-        selectedArea != "Select Area" &&
-        acceptTerms
+    func validationMessage(_ message: String) -> some View {
+        Text(message)
+            .font(.caption)
+            .foregroundColor(.red)
+            .padding(.horizontal)
     }
-    
-    func registerUser() {
-        attemptedRegister = true
-        
-        guard formIsValid() else {
-            return
-        }
-        isLoading = true
-        errorMessage = ""
-        
-        let db = Firestore.firestore()
-        db.collection("users")
-            .whereField("username", isEqualTo: username)
-            .getDocuments { snapshot, error in
-                if let error = error {
-                    print("🔥 Firebase Error: \(error)")
-                    print("🔥 Description: \(error.localizedDescription)")
-                    self.errorMessage = "Failed to register: \(error.localizedDescription)"
-                    self.isLoading = false
-                    return
-                }
-
-                
-                if snapshot?.documents.count ?? 0 > 0 {
-                    errorMessage = "Username already taken."
-                    isLoading = false
-                    return
-                }
-                
-                Auth.auth().createUser(withEmail: email, password: password) { result, error in
-                    if let error = error {
-                        print("🔥 Firebase Error: \(error)")
-                        print("🔥 Description: \(error.localizedDescription)")
-                        errorMessage = "Failed to register: \(error.localizedDescription)"
-                        isLoading = false
-                        return
-                    }
-                    
-                    guard let uid = result?.user.uid else { return }
-                    
-                    let userData: [String: Any] = [
-                        "name": name,
-                        "username": username,
-                        "email": email,
-                        "area": selectedArea,
-                        "createdAt": Timestamp()
-                    ]
-                    
-                    db.collection("users").document(uid).setData(userData) { error in
-                        isLoading = false
-                        if let error = error {
-                            print("🔥 Firebase Error: \(error)")
-                            print("🔥 Description: \(error.localizedDescription)")
-                            errorMessage = "Failed to save user data: \(error.localizedDescription)"
-                        } else {
-                            dismiss()
-                        }
-                    }
-                }
-            }
-    }
-}
-
-#Preview {
-    RegisterView()
 }

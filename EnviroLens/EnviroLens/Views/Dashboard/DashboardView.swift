@@ -143,7 +143,7 @@ struct DashboardView: View {
                     case .notifications: NotificationsView()
                     case .leaderboard: LeaderboardView()
                     case .mission: OurMissionView()
-                    //default : Text("Error")
+//                    default : Text("Error")
                     
                 }
             }
