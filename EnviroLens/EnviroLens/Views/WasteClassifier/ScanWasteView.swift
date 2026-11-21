@@ -280,10 +280,16 @@ struct ScanWasteView: View {
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 print("Error fetching guidelines: \(error)")
+                DispatchQueue.main.async {
+                    self.isLoadingGuidelines = false
+                }
                 return
             }
             guard let data = data else {
                 print("No data")
+                DispatchQueue.main.async {
+                    self.isLoadingGuidelines = false
+                }
                 return
             }
             do {
@@ -294,7 +300,9 @@ struct ScanWasteView: View {
                 }
             } catch {
                 print("Decoding error: \(error)")
-                isLoadingGuidelines = false
+                DispatchQueue.main.async {
+                    self.isLoadingGuidelines = false
+                }
             }
         }.resume()
     }

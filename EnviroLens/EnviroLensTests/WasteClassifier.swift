@@ -10,6 +10,14 @@ import XCTest
 final class ScanViewUITests: XCTestCase {
     
     let app = XCUIApplication()
+
+    private var testUsername: String {
+        ProcessInfo.processInfo.environment["ENVIROLENS_TEST_USERNAME"] ?? "demo_user"
+    }
+
+    private var testPassword: String {
+        ProcessInfo.processInfo.environment["ENVIROLENS_TEST_PASSWORD"] ?? "DemoPass@123"
+    }
     
     override func setUpWithError() throws {
         // Stop immediately when a failure occurs
@@ -21,7 +29,7 @@ final class ScanViewUITests: XCTestCase {
         app.launch()
         
         // Login using username and password before continuing
-        loginWithUsernameAndPassword(username: "shahein", password: "Ockersz@$5")
+        loginWithUsernameAndPassword(username: testUsername, password: testPassword)
     }
     
     override func tearDownWithError() throws {

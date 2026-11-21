@@ -10,6 +10,14 @@ import XCTest
 final class LoginViewUITests: XCTestCase {
     
     let app = XCUIApplication()
+
+    private var testUsername: String {
+        ProcessInfo.processInfo.environment["ENVIROLENS_TEST_USERNAME"] ?? "demo_user"
+    }
+
+    private var testPassword: String {
+        ProcessInfo.processInfo.environment["ENVIROLENS_TEST_PASSWORD"] ?? "DemoPass@123"
+    }
     
     override func setUpWithError() throws {
         continueAfterFailure = false
@@ -25,12 +33,12 @@ final class LoginViewUITests: XCTestCase {
         let usernameField = app.textFields["usernameField"]
         XCTAssertTrue(usernameField.waitForExistence(timeout: 3))
         usernameField.tap()
-        usernameField.typeText("shahein")
+        usernameField.typeText(testUsername)
         
         let passwordField = app.secureTextFields["passwordField"]
         XCTAssertTrue(passwordField.waitForExistence(timeout: 3))
         passwordField.tap()
-        passwordField.typeText("Ockersz@$5")
+        passwordField.typeText(testPassword)
         
         let continueButton = app.buttons["loginButton"]
         XCTAssertTrue(continueButton.exists)

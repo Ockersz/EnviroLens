@@ -60,3 +60,21 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Secrets & local Firebase config
+GoogleService-Info.plist
+.env
+.env.*
+
+# Backend & editors
+node_modules/
+firebase-debug.log
+firebase-debug.*.log
+.vscode/
+.idea/
+

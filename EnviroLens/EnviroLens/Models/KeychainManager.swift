@@ -13,19 +13,20 @@ struct KeychainManager {
     static let service = "com.enviroLens.login"
 
     static func save(email: String, password: String) -> Bool {
-        guard let emailData = email.data(using: .utf8),
-              let passwordData = password.data(using: .utf8) else {
+        guard let passwordData = password.data(using: .utf8) else {
             return false
         }
+
+        delete()
 
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
             kSecAttrAccount as String: email,
-            kSecValueData as String: passwordData
+            kSecValueData as String: passwordData,
+            kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlockedThisDeviceOnly
         ]
 
-        SecItemDelete(query as CFDictionary)
         let status = SecItemAdd(query as CFDictionary, nil)
         return status == errSecSuccess
     }

@@ -13,7 +13,15 @@ class AuthViewModel: ObservableObject {
     
     init() {
         authListener = Auth.auth().addStateDidChangeListener { [weak self] _, user in
-            self?.user = user
+            DispatchQueue.main.async {
+                self?.user = user
+            }
+        }
+    }
+
+    deinit {
+        if let handle = authListener {
+            Auth.auth().removeStateDidChangeListener(handle)
         }
     }
     
@@ -35,7 +43,9 @@ class AuthViewModel: ObservableObject {
                     return
                 }
                 
-                self?.lastSignedInEmail = email
+                DispatchQueue.main.async {
+                    self?.lastSignedInEmail = email
+                }
                 self?.signIn(email: email, password: password, completion: completion)
             }
     }
@@ -47,7 +57,9 @@ class AuthViewModel: ObservableObject {
                 print("Sign-in error: \(error.localizedDescription)")
                 completion(false, error)
             } else {
-                self?.user = result?.user
+                DispatchQueue.main.async {
+                    self?.user = result?.user
+                }
                 self?.fetchCurrentUserData(uid: result?.user.uid)
                 completion(true, nil)
             }
@@ -102,7 +114,9 @@ class AuthViewModel: ObservableObject {
                         print("Error saving user data: \(error.localizedDescription)")
                     } else {
                         print("User successfully signed up and saved.")
-                        self?.user = result?.user
+                        DispatchQueue.main.async {
+                            self?.user = result?.user
+                        }
                     }
                 }
             }
@@ -139,7 +153,10 @@ class AuthViewModel: ObservableObject {
     func signOut() {
         do {
             try Auth.auth().signOut()
-            self.user = nil
+            DispatchQueue.main.async {
+                self.user = nil
+                self.currentUserName = nil
+            }
         } catch {
             print("Sign-out error: \(error.localizedDescription)")
         }
